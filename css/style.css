@@ -1,0 +1,194 @@
+*
+{
+	box-sizing: border-box;
+
+	
+}
+body
+{
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300 ;
+	color: #000000;
+}
+.cabecera
+{
+	padding-top: 15px;
+	padding-bottom: 15px;
+	/*background-color: rgb(204, 152, 42);  cabecera de color*/ 
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 999;
+}
+.cabecera .container
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.cabecera .link-logo
+{
+	display: inline-block;
+	vertical-align: middle ;	
+}
+.cabecera .link-logo .logo
+{
+	width: 70px;
+	height: auto;
+}
+
+.cabecera .menu
+{
+	
+}
+.cabecera .menu a 
+{
+	margin-left: 7.5px;
+	margin-right: 7.5px;
+	color: rgba(255, 255, 255,1);
+	font-size: 12px;
+	font-weight: 400 ;
+	text-transform: uppercase;
+	text-decoration: none;
+	letter-spacing: 2px;
+	word-spacing: 5px;
+}
+a
+{
+	display: inline-block;
+}
+section
+{
+	position: relative;
+}
+.container
+{
+	width: 1920;
+	padding: 0 15px;
+	margin: 0 auto;
+}
+/*.container-full
+{
+	width: 100%;
+	padding: 0 15px;	
+}*/
+.fila
+{
+	margin-left: -15px;
+	margin-right: -15px;
+	display: flex;
+	flex-wrap: wrap;
+}
+.columna
+{
+	padding-left: 15px;
+	padding-right: 15px;
+	
+}
+.columna-100
+{
+	width: 100%;
+}
+.columna-50
+{
+	width: 50%;
+}
+.columna-35
+{
+	width: 35%;
+}
+.columna-33
+{
+	width: 33.33%;
+}
+.sin-padding
+{
+	padding-right: 0;
+	padding-left: 0;
+}
+.contenedor-cuadrado
+{
+	width: 100%;
+	padding-bottom: 100%;
+	position: relative;
+}
+.contenedor-cuadrado img
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+.section
+{
+	padding-top: 60px;
+	padding-bottom: 60px;
+}
+.centrar-texto
+{
+	text-align: center;
+}
+.importante
+{
+	font-style: italic;
+}
+.justificar-texto
+{
+	text-align: justify;
+}
+.banner-home
+{
+	width: 100%;
+	height: auto;
+	
+}
+.btn
+{
+	padding: 15px 30px;
+	font-size: 16px;
+	font-weight: 600;
+	text-decoration: none;
+	text-align: center;
+	border: 2px solid #fff;
+}
+.btn.boton-color
+{
+	background-color: #F2CB57;
+	border: 2px solid #F2A97E;
+	color: #4C3F59;
+	border-radius: 15px;
+}
+#banner
+{
+
+}
+#banner .container
+{
+	position: absolute;
+	top: 165px;
+	left: 0;
+	right: 0;
+}
+#banner .container h1
+{
+	font-size: 55px;
+	color: #fff;
+	margin: 0;
+}
+#banner .container p
+{
+	font-size: 20px;
+	color: #fff ;
+	line-height: 1;
+	
+	
+}
+#especialidad
+{
+
+
+}
