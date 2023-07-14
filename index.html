@@ -1,101 +1,182 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
-	<meta name="description" content="Atención Veterinaria Las 24hs, Análisis y Estudios, Cirugías y más! Consultá Ahora! El Mejor Plan de Salud para Tu Mascota. Más de 300 Veterinarios en CABA. Consultas Veterinarias. Plan de Salud Mascotas. Cobertura de Castraciones.">
-	<meta name="keyrds" content="Atención Veterinaria 24 hs, Internación, Análisis y Estudios, Cirugías, Especialistas, Plan de Salud para Tu Mascota, Cobertura de Castraciones, Veterinarios en CABA">
-	<meta name="author" content="Consultora Medy Strategy s.a.s.">
-	<title> Hospital veterinario My Vet - Bienvenidos!</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">      <!-- google fonts -->
+	<meta name="description" content="Sofía Mileby Photography. Sesiones para embarazadas, recién nacidos, cake smash y familias. Estudio en CABA. Reservar. Servicios de Fotografía Profesional. Reserva tu sesión.">
+	<meta name="keyrds" content="Photography, Sesiones para embarazadas, recién nacidos, newborn,  cake smash, fotografía familiar, estudio en CABA, Servicios de Fotografía Profesional">
+	<meta name="author" content="Consultant S.A.S."> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title> Sofía Mileby - Fotógrafa infantil </title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">      <!-- google fonts  -->
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 	<link rel="stylesheet"  href="css/normalice.css"> 
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="shortcut icon" type="text/css" href="img/logo.png">
+	<script src="https://kit.fontawesome.com/5fa3e98351.js" crossorigin="anonymous">  
+	</script> <!-- tipografia de fonts awesome -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUd8V4-eRzgWVhUATsL5FkAHRmktRSTGI"></script>
+	 
+	
 
 </head>
-<body>
-	<header class="cabecera">
-		<div class="container">
-			<a href="index.html" class="link-logo">
-				<img class="logo" src="img/logo.png" width="313" height="235">
-			</a>
-			<nav class="menu">
-				<a href="index.html#especialidad">Especialidades</a>
-				<a href="nosotros.html">Nosotros</a>
-				<a href="Contacto.html">Contacto</a>
 
-			</nav>
-		</div>	
-	
+<body >
+	<header class="cabecera">
+		<div class="container" hidden>
+			
+				<a id="buscador"href="" class="search"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></a><!-- buscador -->
+				<form id="inputBuscador" class="padding-buscador" >
+					<input id="usuarioEscribe" type="texto" placeholder="Fotos por temática...">
+					<input id="enviarBusqueda" class="btn.boton-color" type="submit" value="Buscar">
+				</form>
+			 
+					  
+			<a href="index.html" class="link-logo">
+				<img class="logo" src="img/logo.png" width="378" height="214">
+			</a>
+					<nav class="menu">
+					<a href="index.html">Inicio</a>
+					<a href="index.html#galerias">Familias</a>
+					<a href="index.html#galerias">Maternidad</a>
+					<a href="index.html#galerias">Cake Smash</a>
+					<a href="index.html#galerias">Newborn</a>
+					<a href="index.html#nosotros">Sobre Mi</a>
+				</nav> 
+				<a href="" class="hamb"><i class="fa-solid fa-bars"></i></a>
+			</div>	
 	</header>
+
 	<main>
-		<section id="banner">
-			<img class="banner-home" src="img/imagen4.jpg" width="1280" height="853">
+		<!-- <section class="trans" id="fotosdetalle"hidden>
+					
+		</section> -->
+		<section id="banner" class="banner-h">
+			<div id="fotosdetalle" class="container2">     
+				<div class="fila columna ">
+					  <div class="columna columna-mb-50 sin-padding">  <!--en media query quitar mb50-->
+						<div id="filaRBuscador" class="fila">     <!--a partir de aca es en .js-->
+						
+				</div>
+				</div>
+				</div>
+				</div>	
+			<img class="banner-home" src="img/imagen1.jpg" width="1280" height="853">
+			
+
 			<div class="container">
 				<div class="fila">
-					<div class="columna columna-50">
-					<h1>Acompañando cada momento</h1>
-						<p>Contamos con los mejores profesionales para la atención de tu mascota Lorem ipsum dolor </p>
-						<a href="#especialidades" class="btn boton-color">Ver especialidades</a>
+					<div class="columna columna-mb-100">
+					<h1>La magia en un instante</h1>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore </p>
 					 </div>
 				</div>	
 			</div>			
 		</section>
-		<section id="especialidad" class="especialidades">
+
+		<section id="galeria" class="galerias">
 			<div class="container">
 				<div class="fila">
-					<div class="columna columna-100 centrar-texto">
-					<h1>Especialidades</h1>
+					<div class="columna columna-mb-100">
+						<h2 class="titulos">Galeria</h2>
 					</div>
 				</div>
-				<div class="fila">
-					<div class="columna columna-50 sin-padding">
-						<div class="contenedor-cuadrado">
-							<img src="img/imagen9.jpg">
-						</div>
-					 </div>
-					 <div class="columna columna-50">
+				<div class="fila columna">
+					  <div class="columna columna-mb-100 sin-padding">
 						<div class="fila">
-							<div class="columna columna-50 sin-padding">
+							<div class="columna columna-mb-50 sin-padding">
 								<div class="contenedor-cuadrado">
-									<img src="img/imagen8.jpg">	
-								</div>
-								<div class="contenido-cuadrado">
+									<img class="filtro_color" src="img/imagen2.jpg">
 									
-								</div>
-							</div>	
-							<div class="columna columna-50 sin-padding">
-								<div class="contenedor-cuadrado">
-									<img src="img/imagen6.jpg">	
+									<div class="contenido-cuadrado">
+										<a id="Familias" href="galeria.html" class="btn boton-transparente" target="_self">Familias</a>
+									</div>	
 								</div>
 							</div>
-							<div class="columna columna-50 sin-padding">
+							<div class="columna columna-mb-50 sin-padding">
 								<div class="contenedor-cuadrado">
-									<img src="img/imagen7.jpg" >	
+									<img class="filtro_color" src="img/imagen3.jpg">
+									<div class="contenido-cuadrado">
+										<a id="maternidad"class="btn boton-transparente" href="galeria.html" target="_self">Maternidad</a>
+										
+									</div>	
 								</div>
 							</div>
-							<div class="columna columna-50 sin-padding">
+							<div class="columna columna-mb-50 sin-padding">
 								<div class="contenedor-cuadrado">
-									<img src="img/imagen5.jpg" >	
+									<img class="filtro_color" src="img/imagen4.jpg" >
+									<div class="contenido-cuadrado">
+										<a id="CakeSmash" class="btn boton-transparente" href="galeria.html" target="_self">Cake Smash</a>
+									</div>	
+								</div>
+							</div>
+							<div class="columna columna-mb-50 sin-padding">
+								<div class="contenedor-cuadrado">
+									<img class="filtro_color" src="img/imagen5.jpg" >
+									<div class="contenido-cuadrado">
+										<a id="Newborn"  class="btn boton-transparente" href="galeria.html" target="_self">Newborn</a>
+									</div>	
 								</div>
 							</div>
 						</div>
 					 </div>
 				</div>	
-			</div>		
+			</div>	
+			</section>	
 
-		</section>
-
+			<section id="nosotros" class="sobre_mi">
+				<div class="container">
+					<div class="fila">
+						<div class="columna columna-mb-100">
+						<h2 class="titulos">Sobre mí</h2>
+						</div>
+					</div>
+					<div class="fila columna">
+						  <div class="columna columna-mb-100">
+						  
+							<div class="fila">
+								<div class="columna columna-mb-100 ">
+									<div class="contenedor-cuadrado ">
+										<img src="img/imagen6.jpg">
+			
+										</div>
+										<div>
+											<p class="centrado">
+												<span class="importante">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temporincitation ullamco aliquip ex ea commodo brci officia deserunt mollit anim id est laborum.</span>
+											</p>
+										</div>	
+									</div>
+								</div>
+			</section>
 	</main>
-	<footer>
-			<div class="container">
-				<div class="fila">
-					<div class="columna"> </div>
-				</div>
-								
+	<footer >
+		<div class="prefooter">     				 
+		<div class="container">	
+			<div class="fila ">		
+				<div class="columna columna-mb-100 ">      
+					<div class="mapa">							
+					<iframe width="520" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" id="gmap_canvas" src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Av.%20Calchaqu%C3%AD%206200,%20B1888%20Florencio%20Varela,%20Provincia%20de%20Buenos%20Aires%20Florencio%20Varela+()&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+					</div>	
+				</div>	
 			</div>
-	</footer>			
+		</div>				
+		</div>
+		<div class="pie">				 
+		<div class="container">	
+			<div class="fila">		
+				<div class="columna columna-mb-100">
+					&reg; Derechos reservados <em>mfyamilaferrufino</em>
+				</div>	
 			</div>
+		</div>	
+		</div>
+	
+	</footer>
+	<script src="js/jquery.js"></script> <!-- evita error de transiciones en google -->
+	<script src="js/funciones.js"></script>
+
 </body>
 </html>
