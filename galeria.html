@@ -30,42 +30,55 @@
 			</a>
 					<nav class="menu">
 					<a href="index.html">Inicio</a>
-					<a href="index.html#galerias">Familias</a>
-					<a href="index.html#galerias">Maternidad</a>
-					<a href="index.html#galerias">Cake Smash</a>
-					<a href="index.html#galerias">Newborn</a>
+					<a href="index.html#galeria">Galerias</a>
 					<a href="index.html#nosotros">Sobre Mi</a>
+					<a id="enlaceHistorial" href="galeria.html#historial">Historial</a>
 				</nav> 
 				<a href="" class="hamb"><i class="fa-solid fa-bars"></i></a>
 
 			</div>	
 	</header>
 <main>
-	<section id="guardadoLocal" class="localGuardado">
-			<div  class="container">     
+	<section id="detalleselec">
+			<div  class="containerLocal">     
 				<div class="fila columna ">
-					  <div id="borrando" class="columna columna-mb-100 sin-padding">  <!--en media query quitar mb50-->
+					<div class="columna columna-mb-100 sin-padding">  <!--en media query quitar mb50-->
 						<div id="filaLocal" class="fila">     <!--a partir de aca es en .js-->
-							
-
-
 						
-				</div>
-				</div>
-				</div>
-				</div>	
+						
 
+						</div>
+						
+					</div>
+					
+
+				</div>
+
+			</div>	
+	</section>
+
+	<section id="historial">
+			<div  class="containerLocal">     
+				<div class="fila columna ">
+					<div class="columna columna-mb-100 sin-padding">  <!--en media query quitar mb50-->
+						<div id="filaHistorial" class="fila">     <!--a partir de aca es en .js-->
+						
+						
+
+						</div>
+						
+					</div>
+					
+
+				</div>
+
+			</div>	
 	</section>
 		<section id="cake" class="cakes">
 			<div class="container">
 				<div class="fila columna">
 					  <div class="columna columna-mb-100 sin-padding">
-						<div id="cake_fotos" class="fila">	<!--a partir de aquí se generan desde .js-->
-
-
-
-							
-						
+						<div id="cake_fotos" class="fila">	<!--a partir de aquí se generan desde .js-->	
 							
 		    			</div>
 		    		</div>
@@ -122,9 +135,28 @@
 		<div class="container">	
 			<div class="fila ">		
 				<div class="columna columna-mb-100 ">      
-					<div class="mapa">	
-					<!--acá va el mapa de google maps-->						
-					</div>	
+					<div id="map" class="mapa">							
+					<script async
+					    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWgtv_ujD2pD_7xscNaSAaniI2UdrufLs&callback=initMap">
+					</script>
+					<script >
+						const coordenadas = { lat:-34.77461295722258, lng:-58.26752023277167};
+						const mapDiv = document.getElementById("map");
+						let = map;
+						let = market;
+						function initMap(){
+							map = new google.maps.Map(mapDiv, {
+								center: coordenadas,
+								zoom: 15,
+							});
+							market = new google.maps.Marker({
+								position:coordenadas,
+								map: map,
+
+							});
+						}
+					</script>
+					</div>		
 				</div>	
 			</div>
 		</div>				
@@ -146,24 +178,3 @@
 
 </body>
 </html>
-
-
-<!--<body>
---	<header>
-				<section>
-					<h1 id="infoColections"></h1>
-				</section>
-
-	</header>
-	 
-		<div  id="contenedorParrafos" class="Contenedor_Parrafos">
-
-		</div>
-
-
-
-
-
-
--->
-	

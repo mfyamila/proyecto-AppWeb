@@ -85,6 +85,10 @@ footer .pie
 	position: relative;
 	z-index: 2;
 }
+.cabecera .carrito.abierto {
+display: contents;
+}
+
 
 .cabecera .menu
 {
@@ -143,6 +147,13 @@ section
 	padding: 0 1rem;
 	margin: 0 auto;
 }
+.containerLocal
+{
+	width: 100%;
+	padding: 0 1rem;
+	margin: 0 auto;
+}
+
 
 .container2                       /*es del buscador*/
 {
@@ -427,6 +438,13 @@ section
     color: #fff;
 }
 
+.historial .shared_icon
+{
+ 	color: rgba(255, 255, 255,1);
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 2;	
+}
 .cakes .location_icon                          /*estilos del icono*/
 {
     color: rgba(255, 255, 255,1);
@@ -434,6 +452,7 @@ section
     position: relative;
     z-index: 2;
 }
+
 .cakes .modal_location                              /*donde se va a mostrar la info*/
 {
 	transition: all 0.5s ease; 
@@ -456,15 +475,24 @@ section
 	transform: translateY(2%);
 }*/
 
+.historial .location_icon {
+    color: rgba(255, 255, 255,1);
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 2;
 
-
-/*colocar a la columna que se genera en js para el detalle*/
-.ocultarDetalleLocal{
-	display: none;
 }
-
-
-
+.contenedor-cuadrado .contenido-cuadrado-his    /*para que se muestre el icono location*/
+{
+	position: absolute;
+    text-align: right;
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    top: 90%;
+    transform: translateY(-90%);
+    color: #fff;
+}
 .mapa											/*esto es un div, modifico sus propiedades*/
 {
 	position: relative;
@@ -530,6 +558,17 @@ section
 	font-size: 2rem;
 	
 }
+.titulodetalle
+{
+	text-align: center;
+	font-weight: bold;
+	font-size: 2rem;
+    margin-block-end: 0;
+    margin-block-start: 1rem
+}
+.margenDetalle
+{margin-block-start: 2.5em;}
+
 .banner-home
 {
 	width: 100%;
@@ -566,6 +605,14 @@ section
 	border-color:#c0c0a8;
 	color: #fff;			/*color de la letra*/
 	
+}
+.btn-cargar {
+	font-size: 1rem;
+	font-weight: 600;
+	text-align: center;
+	color: #b99245;
+	display: block;
+	padding-top: 1rem;
 }
 
 
@@ -649,6 +696,33 @@ section
 {
 	color:#987352;
 }
+
+#detalleselec .titulodetalle
+{
+	color:#987352;
+	text-align: center;
+
+}
+#detalleselec .detdescripciones
+{
+	color:#987352;
+	text-align: center;
+
+}
+#detalleselec .fechastyle
+{
+	margin-block-start: 0;
+	margin-block-end: 0;
+}
+#historial
+{
+	background-color: #f9f9f1;
+}
+#historial .containerLocal
+{
+	color: #987352;
+    text-align: center;
+}
 #cake
 {
 	background-color:#f9f9f1;  
@@ -660,6 +734,10 @@ section
 #contenedorParrafos
 {
 	color: #000;
+}
+#detalleselec
+{
+	background-color:#f9f9f1;  
 }
 #tips
 {

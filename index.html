@@ -39,11 +39,9 @@
 			</a>
 					<nav class="menu">
 					<a href="index.html">Inicio</a>
-					<a href="index.html#galerias">Familias</a>
-					<a href="index.html#galerias">Maternidad</a>
-					<a href="index.html#galerias">Cake Smash</a>
-					<a href="index.html#galerias">Newborn</a>
+					<a href="index.html#galeria">Galerias</a>
 					<a href="index.html#nosotros">Sobre Mi</a>
+					<a id="enlaceHistorial" href="galeria.html#historial">Historial</a>
 				</nav> 
 				<a href="" class="hamb"><i class="fa-solid fa-bars"></i></a>
 			</div>	
@@ -81,7 +79,7 @@
 			<div class="container">
 				<div class="fila">
 					<div class="columna columna-mb-100">
-						<h2 class="titulos">Galeria</h2>
+						<h2 class="titulos">Galerias</h2>
 					</div>
 				</div>
 				<div class="fila columna">
@@ -157,8 +155,27 @@
 		<div class="container">	
 			<div class="fila ">		
 				<div class="columna columna-mb-100 ">      
-					<div class="mapa">							
-					<iframe width="520" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" id="gmap_canvas" src="https://maps.google.com/maps?width=520&amp;height=400&amp;hl=en&amp;q=Av.%20Calchaqu%C3%AD%206200,%20B1888%20Florencio%20Varela,%20Provincia%20de%20Buenos%20Aires%20Florencio%20Varela+()&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+					<div id="map" class="mapa">							
+					<script async
+					    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWgtv_ujD2pD_7xscNaSAaniI2UdrufLs&callback=initMap">
+					</script>
+					<script >
+						const coordenadas = { lat:-34.77461295722258, lng:-58.26752023277167};
+						const mapDiv = document.getElementById("map");
+						let = map;
+						let = market;
+						function initMap(){
+							map = new google.maps.Map(mapDiv, {
+								center: coordenadas,
+								zoom: 15,
+							});
+							market = new google.maps.Marker({
+								position:coordenadas,
+								map: map,
+
+							});
+						}
+					</script>
 					</div>	
 				</div>	
 			</div>

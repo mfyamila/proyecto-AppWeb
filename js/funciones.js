@@ -7,7 +7,8 @@ const filaRBuscador = document.getElementById("filaRBuscador");
 const filaLocal = document.getElementById("filaLocal");
 const usuarioEscribe = document.getElementById("usuarioEscribe");
 const inputBuscador = document.getElementById("inputBuscador");
-const guardadoLocal = document.getElementById("guardadoLocal");
+const detalleselec = document.getElementById("detalleselec");
+const filaHistorial = document.getElementById("filaHistorial");
 
 
 
@@ -90,6 +91,7 @@ var acciones = {
 		jQuery("body").toggleClass("abierto");
 		jQuery(".cabecera .search").toggleClass("abierto")
 		jQuery(this).find("i").toggleClass("fa-x");
+		jQuery(".cabecera .carrito").toggleClass("abierto")
 
 		
 	},
@@ -155,7 +157,7 @@ jQuery(window).resize(acciones.redimensionar);
 
 // genero la conexion a la api con ajax
 
-
+	var paginaActual = 1;
 	$('#enviarBusqueda').click(function(ev2){
 		ev2.preventDefault();
 		datoBuscar= $(usuarioEscribe).val();
@@ -164,6 +166,7 @@ jQuery(window).resize(acciones.redimensionar);
 	console.log(valordeUsuario);
 
 	var url;
+	
 	//comparo y muestro la tematica asociada					
 	if (
     valordeUsuario === "familia" ||
@@ -172,13 +175,13 @@ jQuery(window).resize(acciones.redimensionar);
     valordeUsuario === "hermanos"
   ) {
     url =
-      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=familia&page=1&per_page=3";
+      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=familia&page=${paginaActual}&per_page=3";
   } else if (
     valordeUsuario === "cake smash" ||
     valordeUsuario === "smash cake"
   ) {
     url =
-      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=cake+smash&page=1&per_page=3";
+      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=cake+smash&page=${paginaActual}&per_page=3";
   } else if (
     valordeUsuario === "maternidad" ||
     valordeUsuario === "embarazo" ||
@@ -186,7 +189,7 @@ jQuery(window).resize(acciones.redimensionar);
     valordeUsuario === "pregnant"
   ) {
     url =
-      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=pregnant&page=1&per_page=3";
+      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=pregnant&page=${paginaActual}&per_page=3";
   } else if (
     valordeUsuario === "newborn" ||
     valordeUsuario === "recien nacido" ||
@@ -196,7 +199,7 @@ jQuery(window).resize(acciones.redimensionar);
 
     ) {
     url =
-      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=newborn&page=1&per_page=3";
+      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=newborn&page=${paginaActual}&per_page=3";
   }
 
 			
@@ -225,15 +228,33 @@ jQuery(window).resize(acciones.redimensionar);
 					descripcion:'',
 					id:'',
 					fotolocation:'',
-					created_at:''
+					created_at:'',
+
 
 				};
-				obj.url=busqueda2[i].urls.small;    //este me devuelve la url de la foto
+				obj.url=busqueda2[i].urls.small;    				//este me devuelve la url de la foto
 				//console.log(obj.url);
-				obj.descripcion=busqueda2[i].tags[0].title;
+				obj.descripcion=busqueda2[i].tags[0].title;   		//titulo 
 				obj.id=busqueda2[i].id;
-				obj.fotolocation=busqueda2[i].user.location;
-				obj.created_at=busqueda2[i].created_at;
+				obj.fotolocation=busqueda2[i].user.location;  		//lugar donde se tomo la foto
+				// Obtener la fecha en formato ISO 8601
+				const fechaISO = busqueda2[i].created_at;			//obtengo la fecha de la api y la formateo a dd-mm-aaaa
+
+				// Crear un objeto Date a partir de la fecha ISO
+				const fecha = new Date(fechaISO);
+
+				// Obtener los componentes de la fecha (día, mes, año)
+				const dia = fecha.getDate();
+				const mes = fecha.getMonth() + 1; // Los meses en JavaScript se indexan desde 0, por lo que se suma 1
+				const año = fecha.getFullYear();
+
+				// Crear la fecha formateada en el formato "día mes año"
+				const fechaFormateada = `${dia}/${mes}/${año}`;
+
+				// Asignar la fecha formateada al objeto "obj"
+				obj.created_at = fechaFormateada;
+				//fecha cuando se tomo la foto
+				obj.alt_description=busqueda2[i].alt_description  	//una descripción 
 				path[i]=obj;
 				
 			}
@@ -246,7 +267,7 @@ jQuery(window).resize(acciones.redimensionar);
 		    		filaRBuscador.removeChild(filaRBuscador.firstChild);       //elimina el primer hijo del contenedor filaRbuscador
 		  }
 		}
-		
+		//let detalle_inputLocal = JSON.parse(localStorage.getItem("detalle_inputLocal") || []);
 			//mientras que i <= 2, se muestran tres resultados de búsqueda
 			for( let i = 0; i <= 2; i++) { 
 				                                     
@@ -268,12 +289,27 @@ jQuery(window).resize(acciones.redimensionar);
 			      columnaImagenB.append(contenedorImagenB);
 			      filaRBuscador.append(columnaImagenB);
 
+			
+			//Almaceno en el localstorage la info necesaria
 			(function (index) {
 		    $(`#detalle-buscador-${index}`).click(function () {
-		    	localStorage.setItem('srcImg', path[index].url);   
+		    	detalle_inputLocal.push({
+		    		srcImgLocal: path[index].url,
+		    		created_atLocal: path[index].created_at,
+		    		alt_descriptionLocal: path[index].alt_description,
+		    		title:path[index].descripcion
+		    	});
+		    	
+		    	//almaceno la info en el localstorage
+		    	guardarLocal();  
 			 });
 		  	})
 		  	(i); //valor actual de la interacion
+
+		  	//stringify porque localstorage solo acepta strings
+		  	const guardarLocal =() => {
+		    		localStorage.setItem("historialLocal",JSON.stringify(detalle_inputLocal));
+		    	};
 
 			       /*borra cuando hace click en la lupita */
 				$("#buscador").on("click", function() {
@@ -293,31 +329,40 @@ jQuery(window).resize(acciones.redimensionar);
 
 	/* manejo de los eventos en la sección GALERIA */
 	
+  $('#Familias').click(function(ev3) {
+  	/*if(localStorage.getItem('srcImg')) {
+    // Ocultar el resultado de búsqueda
+    $('.srcImg').hide();
+  }*/
+  	localStorage.removeItem('srcImg');
+    // Redireccionar a la página de galerías
+   
+    var hrefValue = $("#Familias").attr('href');
+    hrefValue = hrefValue + "?id=66119622";
+    window.location.href = $("#Familias").attr('href', hrefValue);
 
-jQuery ('#Familias').click(function(ev3){
-			var hrefValue=$("#Familias").attr('href');
-			hrefValue= hrefValue + "?id=66119622";
-			$("#Familias").attr('href',hrefValue);
-			$(guardadoLocal).addClass("ocultarDetalleLocal"); 
-			
-	
-})
+  });
+
+
 jQuery ('#maternidad').click(function(ev3){
+	localStorage.removeItem('srcImg');
 	var hrefValue=$("#maternidad").attr('href');
-	hrefValue= hrefValue + "?id=ZeWwHRUDkQ8";
+	hrefValue= hrefValue + "?id=uOcIhRUVwmY";
 	$("#maternidad").attr('href',hrefValue);
 
 
 })
 
 jQuery ('#CakeSmash').click(function(ev3){
+	localStorage.removeItem('srcImg');
+
 	var hrefValue=$("#CakeSmash").attr('href');
 	hrefValue= hrefValue + "?id=UJiWvLKePCc";
-
 	$("#CakeSmash").attr('href',hrefValue);
 
 })
 jQuery ('#Newborn').click(function(ev3){
+	localStorage.removeItem('srcImg');
 	var hrefValue=$("#Newborn").attr('href');
 	hrefValue= hrefValue + "?id=3729337";
 
@@ -326,27 +371,126 @@ jQuery ('#Newborn').click(function(ev3){
 })
 
 
-//muestra la img partir de la url almacenada en el localstorage, clave srcImg
-		if (localStorage.getItem('srcImg')) {
-			var guardado = localStorage.getItem('srcImg');
-			console.log(guardado);
-			let columnaImagenLocal = document.createElement("div");            
-			      columnaImagenLocal.className = "columna columna-mb-100 con-padding"; 
-			      ;
 
-			      //envia la búsqueda hacia la galería
-			      let contenedorImagenLocal = document.createElement("div");
-			      contenedorImagenLocal.className = "contenedor-cuadrado";
-			      contenedorImagenLocal.innerHTML = `
-			      <img id="img_local" src="${guardado}">
-			      `;
+/***CODIGO DEL DETALLE***/
 
-			      //utilizo el layout de en galeria
-			      columnaImagenLocal.append(contenedorImagenLocal);
-			      filaLocal.append(columnaImagenLocal);
 
-		} 
 
+// Muestra el detalle del último elemento guardado en el localStorage. Clave srcImg
+let detalle_inputLocal = JSON.parse(localStorage.getItem("historialLocal")) || [];
+if (localStorage.getItem('historialLocal')) {
+  // Vacio el contenedor para eliminar detalles anteriores
+  filaLocal.innerHTML = '';
+
+  // Obtengo el último detalle guardado
+  const ultimoDetalle = detalle_inputLocal[detalle_inputLocal.length - 1];
+
+  var guardado = ultimoDetalle.srcImgLocal;
+  var title = ultimoDetalle.title;
+  var fecha = ultimoDetalle.created_atLocal;
+  var descripcionDetalle = ultimoDetalle.alt_descriptionLocal;
+
+  let columnaTituloLocal = document.createElement("div");
+  columnaTituloLocal.className = "columna columna-mb-100";
+  columnaTituloLocal.innerHTML = `
+    <p class="titulodetalle margenDetalle">: ${title}</p>
+  `;
+
+  let columnaDetalleLoc = document.createElement("div");
+  columnaDetalleLoc.className = "columna-mb-100 detdescripciones";
+  columnaDetalleLoc.innerHTML = `
+    <p class="columna">${descripcionDetalle}</p>
+    <p class="columna">${fecha}</p>
+  `;
+
+  let columnaBtnCargar = document.createElement("div");
+  columnaBtnCargar.className = "columna-mb-100 sin-padding detdescripciones";
+  columnaBtnCargar.innerHTML = `
+    <a id="cargar" href="galeria.html" class="btn-cargar" target="_self">cargar más</a>`;
+  
+  let contenedorImagenLocal = document.createElement("div");
+  contenedorImagenLocal.className = "contenedor-cuadrado";
+  contenedorImagenLocal.innerHTML = `
+    <img id="img_local" class="filtro_color2" src="${guardado}">
+  `;
+
+  filaLocal.append(columnaTituloLocal, columnaDetalleLoc); 
+  columnaDetalleLoc.append(contenedorImagenLocal, columnaBtnCargar);
+}
+
+
+
+/****CODIGO DEL HISTORIAL*****/
+
+
+$('#enlaceHistorial').click(function(ev3) {
+  ev3.preventDefault();
+  
+  if (localStorage.getItem('historialLocal')) {
+    let detalle_inputLocal = JSON.parse(localStorage.getItem("historialLocal")) || [];
+
+    filaLocal.innerHTML = '';
+    // borro el contenido actual del historial antes de agregar los nuevos detalles
+    filaHistorial.innerHTML = '';
+
+    //bandera para colocar margen
+    let primerDetalle = true;
+
+    // recorro el array en orden inverso para mostrar el último elemento primero
+    for (let i = detalle_inputLocal.length - 1; i >= 0; i--) {
+      var guardado = detalle_inputLocal[i].srcImgLocal;
+      var title = detalle_inputLocal[i].title;
+      var fecha = detalle_inputLocal[i].created_atLocal;
+      var descripcionDetalle = detalle_inputLocal[i].alt_descriptionLocal;
+
+      let columTituloLocalH = document.createElement("div");
+      columTituloLocalH.className = "columna columna-mb-100";
+
+      // si es el primer detalle agrego el margen
+      if (primerDetalle) {
+        columTituloLocalH.innerHTML = `
+          <p class="titulodetalle margenDetalle">: ${title}</p>
+        `;
+        primerDetalle = false; // ya no es el primer detalle
+      } else {
+        columTituloLocalH.innerHTML = `
+          <p class="titulodetalle">${title}</p>
+        `;
+      }
+
+      let columDetalleLocH = document.createElement("div");
+      columDetalleLocH.className = "columna-mb-100 detdescripciones";
+      columDetalleLocH.innerHTML = `
+        <p class="columna">${descripcionDetalle}</p>
+        <p class="columna">${fecha}</p>
+      `;
+      
+      let contenImagenLocalH = document.createElement("div");
+      contenImagenLocalH.className = "contenedor-cuadrado";
+      contenImagenLocalH.innerHTML = `
+        <img id="img_local" class="filtro_color2" src="${guardado}">
+      `;
+       let btn_shared = document.createElement("div");     //aquí se coloca la locación de la foto
+       btn_shared.className = "contenido-cuadrado-his";
+       btn_shared.innerHTML =     
+        `<a href="" ="shared_icon"><i class="fa-solid fa-share"></i></a>
+        `; 
+
+      filaHistorial.append(columTituloLocalH, columDetalleLocH); 
+      columDetalleLocH.append(contenImagenLocalH);
+      contenImagenLocalH.append(btn_shared)
+    }
+  }
+});
+
+
+
+
+
+
+
+
+		  	
 
 ////////////////////////
 
@@ -554,8 +698,9 @@ $(document).ready(function(){
                         
                         respuestaCol= JSON.stringify(response); 
                         respuestaCol= JSON.parse(respuestaCol);	
-      
-                        console.log(respuestaCol);// para mostrar todo lo que trae la api
+                        //$("#infoColections").html("Galería "+respuestaCol.title)
+                        //$("#infoColections").html("Colección "+respuestaCol.title+ ": "+respuestaCol.cover_photo.user.instagram_username)				
+                        console.log(respuestaCol);// para mostrar todo lo que devuelve la api
 
                         long2=respuestaCol.preview_photos[0].urls.small;
                         console.log(long2);
@@ -568,7 +713,8 @@ $(document).ready(function(){
 
                         var cantidadImagenes;
                         cantidadImagenes=urls2.length;
-
+                        //Vacio el contenedor del detalle para que no se vea
+                        filaLocal.innerHTML = '';
                         for(let i=0; i < cantidadImagenes; i++) {
                             if (i===0){                                                    //para que la primer foto no tenga padding top
                                 let columnaImagen = document.createElement("div");            
@@ -620,32 +766,8 @@ $(document).ready(function(){
                             console.log("Request failed: " + textStatus);
                             
                         });	   
+
 });
 
 
 
-
-
-
-
-
-
-//  PARA EL MAPA DE GOOGLE
-
-      // Initialize and add the map
-	  function initMap() {
-		// The location of casa
-		const casa = {lat:-34.811067259570606, lng: -58.2808721696923};
-		// The map, centered at casa
-		const map = new google.maps.Map(document.getElementById("map"), {
-			zoom: 15,
-			center: casa,
-		});
-		// The marker, positioned at casa
-		const marker = new google.maps.Marker({
-			position: casa,
-			map: map,
-		});
-		}
-
-		src="https://maps.googleapis.com/maps/api/js?=AIzaSyDUd8V4-eRzgWVhUATsL5FkeykAHRmktRSTGI&callback=initMap&v=weekly"
