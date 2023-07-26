@@ -175,13 +175,13 @@ jQuery(window).resize(acciones.redimensionar);
     valordeUsuario === "hermanos"
   ) {
     url =
-      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=familia&page=${paginaActual}&per_page=3";
+      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=familia&page=${paginaActual}&per_page=30";
   } else if (
     valordeUsuario === "cake smash" ||
     valordeUsuario === "smash cake"
   ) {
     url =
-      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=cake+smash&page=${paginaActual}&per_page=3";
+      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=cake+smash&page=${paginaActual}&per_page=30";
   } else if (
     valordeUsuario === "maternidad" ||
     valordeUsuario === "embarazo" ||
@@ -189,7 +189,7 @@ jQuery(window).resize(acciones.redimensionar);
     valordeUsuario === "pregnant"
   ) {
     url =
-      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=pregnant&page=${paginaActual}&per_page=3";
+      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=pregnant&page=${paginaActual}&per_page=30";
   } else if (
     valordeUsuario === "newborn" ||
     valordeUsuario === "recien nacido" ||
@@ -199,7 +199,7 @@ jQuery(window).resize(acciones.redimensionar);
 
     ) {
     url =
-      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=newborn&page=${paginaActual}&per_page=3";
+      "https://api.unsplash.com/search/photos?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4&query=newborn&page=${paginaActual}&per_page=30";
   }
 
 			
@@ -219,6 +219,7 @@ jQuery(window).resize(acciones.redimensionar);
 			
 			
 			long= busqueda2.length;
+			console.log(long);
 			
 			
 			//console.log(busqueda2[i].urls.raw);
@@ -267,64 +268,98 @@ jQuery(window).resize(acciones.redimensionar);
 		    		filaRBuscador.removeChild(filaRBuscador.firstChild);       //elimina el primer hijo del contenedor filaRbuscador
 		  }
 		}
-		//let detalle_inputLocal = JSON.parse(localStorage.getItem("detalle_inputLocal") || []);
-			//mientras que i <= 2, se muestran tres resultados de búsqueda
-			for( let i = 0; i <= 2; i++) { 
-				                                     
-				let columnaImagenB = document.createElement("div");            
-			      columnaImagenB.className = "columna columna-mb-100 con-padding"; 
-			      columnaImagenB.innerHTML = `
-			      <p class="sin-paddingAyB" >${path[i].descripcion} </p>
-			      
-			      `;
+	
 
-			      //envia la búsqueda hacia la galería
-			      let contenedorImagenB = document.createElement("div");
-			      contenedorImagenB.className = "contenedor-cuadrado";
-			      contenedorImagenB.innerHTML = `
-			      <img id="imagen${i}" src="${path[i].url}">
-			      <a id="detalle-buscador-${i}" class="btn boton-transparente btn-buscador-detalle contenido-cuadrado-buscador" href="galeria.html"target="_self">Ver más</a>
-			      `;
-
-			      columnaImagenB.append(contenedorImagenB);
-			      filaRBuscador.append(columnaImagenB);
-
+	      	const pagButtonS = document.createElement("button");
+			pagButtonS.innerText = "<";
+			pagButtonS.className = "manito pagbtn margenpag";
 			
-			//Almaceno en el localstorage la info necesaria
-			(function (index) {
-		    $(`#detalle-buscador-${index}`).click(function () {
-		    	detalle_inputLocal.push({
-		    		srcImgLocal: path[index].url,
-		    		created_atLocal: path[index].created_at,
-		    		alt_descriptionLocal: path[index].alt_description,
-		    		title:path[index].descripcion
-		    	});
-		    	
-		    	//almaceno la info en el localstorage
-		    	guardarLocal();  
-			 });
-		  	})
-		  	(i); //valor actual de la interacion
 
-		  	//stringify porque localstorage solo acepta strings
-		  	const guardarLocal =() => {
-		    		localStorage.setItem("historialLocal",JSON.stringify(detalle_inputLocal));
-		    	};
+			const pagButtonA = document.createElement("button");
+			pagButtonA.innerText = ">";
+			pagButtonA.className = "manito pagbtn ";
+			filaRBuscador.append(pagButtonS, pagButtonA);
 
-			       /*borra cuando hace click en la lupita */
-				$("#buscador").on("click", function() {
-				    $(filaRBuscador).empty(); 
-				  });
+			//indice para utilizar paginación
+			let indiceImagen = 0;
 
- };
+			// declaro función anonim para almacenar en el localstorage
+			const guardarLocal = () => {
+			    localStorage.setItem("historialLocal", JSON.stringify(detalle_inputLocal));
+			};
+
+			function clickVerMas(indiceImagen) {
+			    $(`#detalle-buscador-${indiceImagen}`).click(function () {
+			        detalle_inputLocal.push({
+			            srcImgLocal: path[indiceImagen].url,
+			            created_atLocal: path[indiceImagen].created_at,
+			            alt_descriptionLocal: path[indiceImagen].alt_description,
+			            title: path[indiceImagen].descripcion
+
+			        });
+
+			        // almaceno la info en el localstorage
+			        guardarLocal();
+			    });
+			}
+
+			function mostrarImagenes() {
+			    // Eliminar imágenes anteriores
+			    filaRBuscador.innerHTML = "";
+
+			    for (let i = 0; i < 2; i++) {
+			        if (indiceImagen >= 0 && indiceImagen < long) {
+			            const columnaImagenB = document.createElement("div");
+			            columnaImagenB.className = "columna columna-mb-100 con-padding";
+			            columnaImagenB.innerHTML = `
+			                <p class="sin-paddingAyB">${path[indiceImagen].descripcion}</p>
+			            `;
+			            //Pasar indiceImagen al btn "ver más", para actualizar la información
+			            const contenedorImagenB = document.createElement("div");
+			            contenedorImagenB.className = "contenedor-cuadrado";
+			            contenedorImagenB.innerHTML = `
+			                <img id="imagen${i}" src="${path[indiceImagen].url}">
+			                <a id="detalle-buscador-${indiceImagen}" class="btn boton-transparente btn-buscador-detalle contenido-cuadrado-buscador" href="galeria.html" target="_self">Ver más</a>
+			            `;
+
+			            columnaImagenB.append(contenedorImagenB);
+			            filaRBuscador.append(columnaImagenB);
+
+			            clickVerMas(indiceImagen); // llamo a la función pasandole el indice actual
+			            indiceImagen++;
+			        }
+			    }
+			    // agrego botones de paginación nuevamente
+			    filaRBuscador.append(pagButtonS, pagButtonA);
+			}
+
+				// Llamar a la función para mostrar las imágenes por primera vez
+				mostrarImagenes();
+
+				pagButtonS.addEventListener("click", () => {
+				    if (indiceImagen > 1) {
+				        indiceImagen -= 4; // Retroceder 4 índices para mostrar las imágenes anteriores a las actuales
+				        mostrarImagenes();
+				    }
+				});
+
+				pagButtonA.addEventListener("click", () => {
+				    if (indiceImagen < long) {
+				        mostrarImagenes();
+				    }
+				});
 
 
-			// menejo de excepcion errores
-		}).fail(function(jqXHR, textStatus) {
-			console.log("Request failed: " + textStatus);
 
-		});
-	});
+			// manejo de excepciones y errores
+			}).fail(function (jqXHR, textStatus) {
+			    console.log("La solicitud falló: " + textStatus);
+			});
+
+				
+				});
+
+		
 
 
 	/* manejo de los eventos en la sección GALERIA */
@@ -379,6 +414,7 @@ jQuery ('#Newborn').click(function(ev3){
 // Muestra el detalle del último elemento guardado en el localStorage. Clave srcImg
 let detalle_inputLocal = JSON.parse(localStorage.getItem("historialLocal")) || [];
 if (localStorage.getItem('historialLocal')) {
+	console.log(detalle_inputLocal);
   // Vacio el contenedor para eliminar detalles anteriores
   filaLocal.innerHTML = '';
 
@@ -403,10 +439,10 @@ if (localStorage.getItem('historialLocal')) {
     <p class="columna">${fecha}</p>
   `;
 
-  let columnaBtnCargar = document.createElement("div");
+  /*let columnaBtnCargar = document.createElement("div");
   columnaBtnCargar.className = "columna-mb-100 sin-padding detdescripciones";
   columnaBtnCargar.innerHTML = `
-    <a id="cargar" href="galeria.html" class="btn-cargar" target="_self">cargar más</a>`;
+    <a id="cargar" href="galeria.html" class="btn-cargar" target="_self">cargar más</a>`;*/
   
   let contenedorImagenLocal = document.createElement("div");
   contenedorImagenLocal.className = "contenedor-cuadrado";
@@ -415,7 +451,7 @@ if (localStorage.getItem('historialLocal')) {
   `;
 
   filaLocal.append(columnaTituloLocal, columnaDetalleLoc); 
-  columnaDetalleLoc.append(contenedorImagenLocal, columnaBtnCargar);
+  columnaDetalleLoc.append(contenedorImagenLocal);
 }
 
 
@@ -568,7 +604,7 @@ getProducts();
 		modalHeader.innerHTML = `
 		<h1 class="modal_header_title">Carrito</h1>
 		`;
-		modalContainer.append(modalHeader);						//el div de modal_Header cuando hace click en el icono de carrito, dentro del div padre******************************
+		modalContainer.append(modalHeader);						//el div de modal_Header cuando hace click en el icono de carrito, dentro del div padre
 
 		const modalButton = document.createElement("h1");
 		modalButton.innerText = "x";
@@ -686,20 +722,14 @@ $(document).ready(function(){
         const urlApi= "https://api.unsplash.com/collections/"+id+"?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4";    
               
          $.ajax({				
-                    url: urlApi,//"https://api.unsplash.com/collections/1052529?client_id=NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4", 
+                    url: urlApi,
                     method: "GET",
-                    headers: {
-                        //Authorization: "NPrhrwLpfTWXBN0do8GImDv8Zo4j8r_F0RAF7bB6qT4" // no me sirve me rechaza el token de esta manera. 
-                        }, //configuro el encabezado con mi token de unplash 
-                        data: {		
-                        }
+                    
          }).done(function(response) {
 
                         
                         respuestaCol= JSON.stringify(response); 
                         respuestaCol= JSON.parse(respuestaCol);	
-                        //$("#infoColections").html("Galería "+respuestaCol.title)
-                        //$("#infoColections").html("Colección "+respuestaCol.title+ ": "+respuestaCol.cover_photo.user.instagram_username)				
                         console.log(respuestaCol);// para mostrar todo lo que devuelve la api
 
                         long2=respuestaCol.preview_photos[0].urls.small;

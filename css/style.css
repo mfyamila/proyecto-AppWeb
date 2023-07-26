@@ -452,7 +452,16 @@ section
     position: relative;
     z-index: 2;
 }
-
+.pagbtn											/*estilos para el btn de paginacion*/
+{
+	margin: 0.67em 0;
+    margin-top: 0.5em;
+    padding-left: 0.3em;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.margenpag
+{ 	margin-left:1rem }
 .cakes .modal_location                              /*donde se va a mostrar la info*/
 {
 	transition: all 0.5s ease; 

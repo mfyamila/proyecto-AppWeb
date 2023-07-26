@@ -136,27 +136,27 @@
 			<div class="fila ">		
 				<div class="columna columna-mb-100 ">      
 					<div id="map" class="mapa">							
-					<script async
-					    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWgtv_ujD2pD_7xscNaSAaniI2UdrufLs&callback=initMap">
-					</script>
-					<script >
-						const coordenadas = { lat:-34.77461295722258, lng:-58.26752023277167};
-						const mapDiv = document.getElementById("map");
-						let = map;
-						let = market;
-						function initMap(){
-							map = new google.maps.Map(mapDiv, {
-								center: coordenadas,
-								zoom: 15,
-							});
-							market = new google.maps.Marker({
-								position:coordenadas,
-								map: map,
+					    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWgtv_ujD2pD_7xscNaSAaniI2UdrufLs&callback=initMap"></script>
+					    <script>
+					        const coordenadas = { lat: -34.77461295722258, lng: -58.26752023277167 };
+					        const mapDiv = document.getElementById("map");
+					        let map; // Cambiado "var" a "let"
+					        let marker; // Cambiado "var" a "let"
 
-							});
-						}
-					</script>
-					</div>		
+					        function initMap() {
+					            map = new google.maps.Map(mapDiv, {
+					                center: coordenadas,
+					                zoom: 15,
+					            });
+
+					            marker = new google.maps.Marker({ // Cambiado "market" a "marker"
+					                position: coordenadas,
+					                map: map,
+					            });
+					        }
+					    </script>
+					</div>
+	
 				</div>	
 			</div>
 		</div>				
