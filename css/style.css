@@ -26,6 +26,7 @@ footer .prefooter
 {
 	position: relative;      /*explicar*/
 	bottom: -0.5rem;
+	padding-top: 9.5rem;
 }
 footer .pie
 {
@@ -270,6 +271,7 @@ section
 	margin-left: 1rem;
 	margin-right: 1rem;
 	color: #987352;
+	padding-bottom: 1rem;
 }
 .card                     /*div de cada card*/
 {
@@ -320,7 +322,7 @@ section
 	padding-right: 2rem;
 	top: 50%;
 	transform: translateY(-50%);             /*para que se posicione bien al centro*/
-	color: #fff;
+	
 }
 
 /*MODAL CARRITO*/       
@@ -435,15 +437,34 @@ section
     padding-right: 2rem;
     top: 90%;
     transform: translateY(-90%);
-    color: #fff;
+   
 }
-
-.historial .shared_icon
+.detallesD .shared_icon
 {
  	color: rgba(255, 255, 255,1);
     font-size: 1.5rem;
     position: relative;
     z-index: 2;	
+    margin-block-start: 0.3em;
+    margin-block-end: 0.3em;
+}
+.historials .shared_icon
+{
+ 	color: rgba(255, 255, 255,1);
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 2;	
+    margin-block-start: 0.3em;
+    margin-block-end: 0.3em;
+}
+.historials .btn-borraH
+{
+ 	color: rgba(255, 255, 255,1);
+    font-size: 1.3rem;
+    position: relative;
+    z-index: 2;
+    padding-left: 0.3rem;
+    
 }
 .cakes .location_icon                          /*estilos del icono*/
 {
@@ -464,43 +485,54 @@ section
 { 	margin-left:1rem }
 .cakes .modal_location                              /*donde se va a mostrar la info*/
 {
-	transition: all 0.5s ease; 
-	/*transform: translateY(160%);     */
-	transform: translateY(2%);
-	width: 80%;
-	margin: 0 5%; /*0 arriba y abajo 5% a los costados*/            
-	color: #fff;
-	/*background-color: rgba(218,198,158,0.9);*/
-	background-color: rgba(0,0,0,0.2);
-	overflow: auto;
-	display: flex;				/*para que se pueda deslizar*/
-	z-index: 0.9;				/*para que no se muestre ensima de menu*/
-	top:42vh ; 
-	padding-left: 0; 
-	border-radius: 1rem;                    
+    width: 80%;
+    margin: 0 5%;
+    color: #fff;
+    background-color: rgba(0,0,0,0.2);
+    overflow: auto;
+    padding-left: 0;
+    border-radius: 1rem;                   
+}
+.detallesD .modal_location                              /*donde se va a mostrar la info*/
+{
+    width: 80%;
+    margin-left: 1rem;
+    color: #fff;
+    background-color: rgba(0,0,0,0.2);
+    overflow: auto;
+    padding-left: 1rem;
+    border-radius: 1rem;                   
+}
+.historials .modal_location                              /*donde se va a mostrar la info*/
+{
+    width: 80%;
+    margin-left: 1rem;
+    color: #fff;
+    background-color: rgba(0,0,0,0.2);
+    overflow: auto;
+    padding-left: 1rem;
+    border-radius: 1rem;                   
 }
 /*.cakes .modal_location .abierto
 {
 	transform: translateY(2%);
 }*/
 
-.historial .location_icon {
-    color: rgba(255, 255, 255,1);
-    font-size: 1.5rem;
-    position: relative;
-    z-index: 2;
 
-}
-.contenedor-cuadrado .contenido-cuadrado-his    /*para que se muestre el icono location*/
+.contenido-cuadrado-his   /*para que se muestre el icono location*/
 {
 	position: absolute;
-    text-align: right;
+    text-align: left;
     width: 100%;
     padding-left: 2rem;
-    padding-right: 2rem;
+    /*padding-right: 2rem;*/
     top: 90%;
     transform: translateY(-90%);
-    color: #fff;
+    
+}
+.pie .link-info
+{
+	color: rgba(255, 255, 255,1);	
 }
 .mapa											/*esto es un div, modifico sus propiedades*/
 {
@@ -704,6 +736,7 @@ section
 #tips .titulos
 {
 	color:#987352;
+
 }
 
 #detalleselec .titulodetalle
@@ -732,9 +765,12 @@ section
 	color: #987352;
     text-align: center;
 }
-#cake
+#footer-info
 {
 	background-color:#f9f9f1;  
+}
+#footer{
+	background-color:#f9f9f1; 
 }
 #infoColections
 {

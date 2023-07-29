@@ -91,7 +91,8 @@ var acciones = {
 		jQuery("body").toggleClass("abierto");
 		jQuery(".cabecera .search").toggleClass("abierto")
 		jQuery(this).find("i").toggleClass("fa-x");
-		jQuery(".cabecera .carrito").toggleClass("abierto")
+		jQuery(".cabecera .carrito").toggleClass("abierto");
+		jQuery(".cabecera .buscador").toggleClass("abierto")
 
 		
 	},
@@ -250,7 +251,7 @@ jQuery(window).resize(acciones.redimensionar);
 				const año = fecha.getFullYear();
 
 				// Crear la fecha formateada en el formato "día mes año"
-				const fechaFormateada = `${dia}/${mes}/${año}`;
+				const fechaFormateada = `${dia}-${mes}-${año}`;
 
 				// Asignar la fecha formateada al objeto "obj"
 				obj.created_at = fechaFormateada;
@@ -328,6 +329,12 @@ jQuery(window).resize(acciones.redimensionar);
 			            clickVerMas(indiceImagen); // llamo a la función pasandole el indice actual
 			            indiceImagen++;
 			        }
+			         /*borra cuando hace click en la lupita */
+				$("#buscador").on("click", function() {
+				    $(filaRBuscador).empty(); 
+				  });
+
+
 			    }
 			    // agrego botones de paginación nuevamente
 			    filaRBuscador.append(pagButtonS, pagButtonA);
@@ -416,7 +423,7 @@ let detalle_inputLocal = JSON.parse(localStorage.getItem("historialLocal")) || [
 if (localStorage.getItem('historialLocal')) {
 	console.log(detalle_inputLocal);
   // Vacio el contenedor para eliminar detalles anteriores
-  filaLocal.innerHTML = '';
+  //filaLocal.innerHTML = '';
 
   // Obtengo el último detalle guardado
   const ultimoDetalle = detalle_inputLocal[detalle_inputLocal.length - 1];
@@ -429,7 +436,7 @@ if (localStorage.getItem('historialLocal')) {
   let columnaTituloLocal = document.createElement("div");
   columnaTituloLocal.className = "columna columna-mb-100";
   columnaTituloLocal.innerHTML = `
-    <p class="titulodetalle margenDetalle">: ${title}</p>
+    <p class="titulodetalle margenDetalle">${title}</p>
   `;
 
   let columnaDetalleLoc = document.createElement("div");
@@ -450,8 +457,21 @@ if (localStorage.getItem('historialLocal')) {
     <img id="img_local" class="filtro_color2" src="${guardado}">
   `;
 
+  let btn_shared = document.createElement("div");     //aquí se coloca btn compartir
+       btn_shared.className = "contenido-cuadrado-his modal_location";
+       btn_shared.innerHTML =     
+        `<a href="" class="shared_icon"><i class="fa-solid fa-share"></i></a>
+        `; 
+
   filaLocal.append(columnaTituloLocal, columnaDetalleLoc); 
   columnaDetalleLoc.append(contenedorImagenLocal);
+  contenedorImagenLocal.append(btn_shared);
+let sharedIcon = btn_shared.querySelector(".shared_icon");
+sharedIcon.addEventListener("click", (eve) => {
+  eve.preventDefault();
+  const index = eve.target.dataset.index;
+  enviarCorreo(ultimoDetalle);
+});
 }
 
 
@@ -461,19 +481,24 @@ if (localStorage.getItem('historialLocal')) {
 
 $('#enlaceHistorial').click(function(ev3) {
   ev3.preventDefault();
-  
+  // Eliminar el contenido actual del historial antes de agregar los nuevos detalles
+  //filaHistorial.innerHTML = '';
+  cargarHistorial();
+});
+
+function cargarHistorial() {  
   if (localStorage.getItem('historialLocal')) {
     let detalle_inputLocal = JSON.parse(localStorage.getItem("historialLocal")) || [];
 
     filaLocal.innerHTML = '';
-    // borro el contenido actual del historial antes de agregar los nuevos detalles
-    filaHistorial.innerHTML = '';
+   
 
     //bandera para colocar margen
     let primerDetalle = true;
-
+   
     // recorro el array en orden inverso para mostrar el último elemento primero
-    for (let i = detalle_inputLocal.length - 1; i >= 0; i--) {
+   // for (let i = detalle_inputLocal.length - 1; i >= 0; i--) {
+   	for (let i = 0; i < detalle_inputLocal.length; i++) {
       var guardado = detalle_inputLocal[i].srcImgLocal;
       var title = detalle_inputLocal[i].title;
       var fecha = detalle_inputLocal[i].created_atLocal;
@@ -485,7 +510,7 @@ $('#enlaceHistorial').click(function(ev3) {
       // si es el primer detalle agrego el margen
       if (primerDetalle) {
         columTituloLocalH.innerHTML = `
-          <p class="titulodetalle margenDetalle">: ${title}</p>
+          <p class="titulodetalle margenDetalle"> ${title}</p>
         `;
         primerDetalle = false; // ya no es el primer detalle
       } else {
@@ -506,23 +531,59 @@ $('#enlaceHistorial').click(function(ev3) {
       contenImagenLocalH.innerHTML = `
         <img id="img_local" class="filtro_color2" src="${guardado}">
       `;
-       let btn_shared = document.createElement("div");     //aquí se coloca la locación de la foto
-       btn_shared.className = "contenido-cuadrado-his";
+       let btn_shared = document.createElement("div");     //aquí se coloca btn borrar del historial y compartir
+       btn_shared.className = "contenido-cuadrado-his modal_location";
        btn_shared.innerHTML =     
-        `<a href="" ="shared_icon"><i class="fa-solid fa-share"></i></a>
+        `<a href="" class="shared_icon"><i class="fa-solid fa-share"></i></a>
+        <a href="" class="btn-borraH"><i class="fa-solid fa-bars fa-x"></i></a>
         `; 
 
-      filaHistorial.append(columTituloLocalH, columDetalleLocH); 
+        filaHistorial.append(columTituloLocalH, columDetalleLocH); 
       columDetalleLocH.append(contenImagenLocalH);
-      contenImagenLocalH.append(btn_shared)
+      contenImagenLocalH.append(btn_shared);
+     // btn_shared.append(btn_borrar);
+
+      let sharedIcon = btn_shared.querySelector(".shared_icon");
+sharedIcon.addEventListener("click", (eve) => {
+  eve.preventDefault();
+  const index = eve.target.dataset.i;
+  enviarCorreo(detalle_inputLocal[i]);
+});
+      let borraH = btn_shared.querySelector(".btn-borraH"); // btn_shared para ser más específico
+borraH.addEventListener("click", () => {
+  // borro el contenido del historial antes de agregar los nuevos detalles
+  filaLocal.innerHTML = '';
+  filaHistorial.innerHTML = '';
+  eliminardHistorial(i); // índice del elemento a eliminar
+});
+    }
+}}
+function eliminardHistorial(index) {
+  if (localStorage.getItem('historialLocal')) {
+    let detalle_inputLocal = JSON.parse(localStorage.getItem("historialLocal")) || [];
+
+    if (index >= 0 && index < detalle_inputLocal.length) {
+      // elimina el elemento del array 
+      detalle_inputLocal.splice(index, 1);
+
+      // actualizo el localStorage con el nuevo array
+      localStorage.setItem("historialLocal", JSON.stringify(detalle_inputLocal));
+
+      // se actualizan los cambios del html
+      cargarHistorial();
     }
   }
-});
+}
+function enviarCorreo(detalle) {
+  const { title, srcImgLocal, alt_descriptionLocal, created_atLocal } = detalle;
+  const destinatario = "destinatario@example.com"; 
+  const asunto = encodeURIComponent(`Sofía Mileby Photography: ${title}`);
+  const cuerpo = encodeURIComponent(`¡Hola!\n\nTe comparto esta fotografía:\n\n
+  	Título: ${title}\nURL: ${srcImgLocal}\nDescripción: ${alt_descriptionLocal}\nFecha: ${created_atLocal}`);
 
-
-
-
-
+  const enlaceCorreo = `mailto:${destinatario}?subject=${asunto}&body=${cuerpo}`;
+  window.open(enlaceCorreo);
+}
 
 
 

@@ -41,7 +41,7 @@
 					<a href="index.html">Inicio</a>
 					<a href="index.html#galeria">Galerias</a>
 					<a href="index.html#nosotros">Sobre Mi</a>
-					<a id="enlaceHistorial" href="galeria.html#historial">Historial</a>
+					<!--<a id="enlaceHistorial" href="galeria.html#historial">Historial</a>  lo dejo comentado xq faltan modificaciones-->
 				</nav> 
 				<a href="" class="hamb"><i class="fa-solid fa-bars"></i></a>
 			</div>	
@@ -151,41 +151,12 @@
 			</section>
 	</main>
 	<footer >
-		<div class="prefooter">     				 
-		<div class="container">	
-			<div class="fila ">		
-				<div class="columna columna-mb-100 ">      
-					<div id="map" class="mapa">							
-					    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWgtv_ujD2pD_7xscNaSAaniI2UdrufLs&callback=initMap"></script>
-					    <script>
-					        const coordenadas = { lat: -34.77461295722258, lng: -58.26752023277167 };
-					        const mapDiv = document.getElementById("map");
-					        let map; // Cambiado "var" a "let"
-					        let marker; // Cambiado "var" a "let"
-
-					        function initMap() {
-					            map = new google.maps.Map(mapDiv, {
-					                center: coordenadas,
-					                zoom: 15,
-					            });
-
-					            marker = new google.maps.Marker({ // Cambiado "market" a "marker"
-					                position: coordenadas,
-					                map: map,
-					            });
-					        }
-					    </script>
-					</div>
-	
-				</div>	
-			</div>
-		</div>				
-		</div>
+		
 		<div class="pie">				 
 		<div class="container">	
 			<div class="fila">		
 				<div class="columna columna-mb-100">
-					&reg; Derechos reservados <em>mfyamilaferrufino</em>
+					Diseñado por <a href="info.html" class="link-info" target="_blank">mfyamilaferrufino</a>
 				</div>	
 			</div>
 		</div>	
